@@ -113,7 +113,7 @@
                
                 $.ajax({
                     url: 'https://jsonplaceholder.typicode.com/posts',  // post api 
-                    //url: 'posts.json', // (추가: IE9에서는 위 url이 안먹힘 페이지를 posts.json으로 다운 받아서 연결시켜주면 IE9에서도 보임)
+                    //url: './posts.json', // (추가: IE9에서는 위 url이 안먹힘 페이지를 posts.json으로 다운 받아서 연결시켜주면 IE9에서도 보임)
                     method: 'GET',
                     success: function (data) {
                         _this.posts =  _.orderBy(data, ['title', 'body'], ['asc', 'asc']);  // 1,타이틀, 2.내용 순으로 순차정렬
