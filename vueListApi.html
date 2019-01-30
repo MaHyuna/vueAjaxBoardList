@@ -78,7 +78,7 @@
 
         <!-- Pagination -->
         <section class="paging">
-            <ul id="pagination" class="number clearfix"></ul>
+            <ul id="pagination"></ul>
         </section>
         <!-- // Pagination -->
     </div>
@@ -116,7 +116,7 @@
                     //url: 'jsontest.json',
                     method: 'GET',
                     success: function (data) {
-                        _this.posts =  _.orderBy(data, ['title', 'body'], ['asc', 'asc']);  // 1,타이틀, 3.내용 순으로 순차정렬
+                        _this.posts =  _.orderBy(data, ['title', 'body'], ['asc', 'asc']);  // 1,타이틀, 2.내용 순으로 순차정렬
                         
                         $('#pagination').pagination({
                             dataSource:  _this.posts,
