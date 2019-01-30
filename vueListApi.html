@@ -1,0 +1,136 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vueListApi</title>
+
+    <style>
+        #app {
+            margin: 0 auto;
+            width: 800px;
+        }
+        #app .title {
+            padding: 20px 0 0px;
+            font-size: 30px;
+            text-align: center;
+        }
+
+        #app #table {
+            width: 100%;
+        }
+        #app #table th {
+            border-bottom: 2px solid black;
+            text-align: center;
+        }
+        #app #table td {
+            padding: 5px 10px;
+            border-bottom: 1px dashed black;
+            text-align: left;
+        }
+        .paging {
+            text-align: center;
+        }
+        .paging #pagination {
+            padding: 0;
+            list-style: none;
+        }
+        .paging #pagination li {
+            display: inline-block;
+            padding: 10px;
+            list-style: none;
+        }
+        .paging #pagination > li.active, 
+        .paging #pagination li.active {
+            background: sandybrown;
+        }
+    </style>
+</head>
+<body> 
+    <div id="app">
+        <h2 class="title">Table List</h2>
+ 
+        <!-- list -->
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>타이틀</th>
+                    <th>내용</th>
+                </tr>
+            </thead>
+            <tbody  is="post-item"
+                    v-for="post in posts"
+                    v-bind:post="post"
+                    v-bind:key="post.id"
+            >
+            </tbody>
+        </table>
+        <!-- // list -->
+
+        <!-- Pagination -->
+        <section class="paging">
+            <ul id="pagination" class="number clearfix"></ul>
+        </section>
+        <!-- // Pagination -->
+    </div>
+
+    
+    
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script src="https://unpkg.com/vue@2.5.22"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
+    <script src="http://pagination.js.org/dist/2.1.4/pagination.js"></script>
+
+    <script>
+        Vue.component('post-item', {
+            props: ['post'],
+            template: `
+                <tr>
+                    <td><strong>{{post.title}}</strong></td>
+                    <td>{{post.body}}</td> 
+                </tr>
+            `
+        })
+        
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                posts: []
+            },
+            mounted: function () {
+                var _this = this;
+               
+                $.ajax({
+                    url: 'https://jsonplaceholder.typicode.com/posts',  // post api
+                    //url: 'jsontest.json',
+                    method: 'GET',
+                    success: function (data) {
+                        _this.posts =  _.orderBy(data, ['title', 'body'], ['asc', 'asc']);  // 1,타이틀, 3.내용 순으로 순차정렬
+                        
+                        $('#pagination').pagination({
+                            dataSource:  _this.posts,
+                            pageSize: 4,
+                            pageRange: 2,
+                            showPrevious: true,
+                            showNext: true,
+                            showPageNumbers: true,
+                            showBeginingOnOmit : false,
+
+                            //pageNumber: 3,
+                            callback: function(data, pagination) {
+                                _this.posts = data;
+                            }
+                        })
+                    },
+                    error: function (error) {
+                        console.log("errpr : " + error);
+                    }
+                });
+            }
+        });
+
+        
+
+    </script>
+</body>
+</html>
