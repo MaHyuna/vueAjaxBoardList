@@ -1,4 +1,5 @@
-# vueAlaxBoardList
+# vueAlaxBoardList  
+https://mahyuna.github.io/vueAlaxBoardList/.
 
 ![img](https://github.com/MaHyuna/vueAlaxBoardList/blob/master/img.PNG?raw=true)
 
