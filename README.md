@@ -1,4 +1,4 @@
-# vueAlaxBoardList  
+# vueAjaxBoardList  
 
 ![img](https://github.com/MaHyuna/vueAlaxBoardList/blob/master/img.PNG?raw=true)
 
